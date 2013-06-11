@@ -1,7 +1,15 @@
 <h1>iHealth-home</h1>
-<div  id="charts"></div>
+<div id="charts"></div>
+<div id="ecgCharts"><div>
+<div id="pulse"><div>
+<div id="spo2"><div>
+
 <ul class = "temperature">
   
 </ul>
 
 <%= subscribe_to "/messages/new" %>
+<%= subscribe_to "/messages/ecg" %>
+<%= subscribe_to "/pulse_spo2" %>
+
+
