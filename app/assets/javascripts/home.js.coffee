@@ -6,50 +6,143 @@ $(document).ready ->
   dataECG =  new Array(100);
   dataPulse =  new Array(5);
   dataSpo2 =  new Array(5);
+  dataBr =  new Array(100);
   
-  for i in [0..100] 
-    dataECG[i] = 0
   
-  getTemperature = (data) ->
-    dataTemperature =  [
-        { step: '1', value: dataT[0] },
-        { step: '2', value: dataT[1] },
-        { step: '3', value: dataT[2] },
-        { step: '4', value: dataT[3] },
-        { step: '5', value: dataT[4] }
-        ]
-    return dataTemperature;
-
-  getECG = (data) ->
-    dataECG1 = []
-    for i in [0..100] 
-      tmp = { "step" : i.toString(),value: data[i] }
-      dataECG1.push(tmp)
-    #for(i=0;i<100;++i)
-     #tmp = { "step" : i.toString() }
-     #dataECG1.push(tmp)
-     #console.log(tmp)
+  getGraphData = (data) ->
+    dataG = []
+    for d,i in data 
+      tmp = { "step" : i.toString(),value: d }
+      dataG.push(tmp) 
+    return dataG;
     
-    return dataECG1;    
+  getCurrentTime = (flag) ->
+    currentTime = ""
+    myDate = new Date()
+    year = myDate.getFullYear();
+    month = parseInt(myDate.getMonth().toString()) + 1 #month是从0开始计数的，因此要 + 1
+    if month < 10
+      month = "0" + month.toString() 
+    date = myDate.getDate()
+    if date < 10 
+      date = "0" + date.toString()    
+    hour = myDate.getHours();
+    if hour < 10
+      hour = "0" + hour.toString()    
+    minute = myDate.getMinutes()
+    if minute < 10
+      minute = "0" + minute.toString()    
+    second = myDate.getSeconds()
+    if second < 10
+      second = "0" + second.toString()   
+    if flag == "0"   
+      currentTime = year.toString() + month.toString() + date.toString() + hour.toString() +    minute.toString() + second.toString() #返回时间的数字组合    
+    else if flag == "1"
+      currentTime = year.toString() + "-" + month.toString() + "-" + date.toString() + " " + hour.toString() + ":" + minute.toString() + ":" + second.toString() #以时间格式返回
+    return currentTime
+  
+  #init
+  for i in [0..100] 
+    dataECG[i] = 0 
+    dataBr[i] = 0
+    
+  for i in [0..5] 
+    dataPulse[i] = 0
+  
+  new Morris.Line({   
+    element: 'ecgChart',
+    data: getGraphData(dataECG) ,
+    xkey: 'step',
+    ykeys: ['value'],
+    parseTime: false,
+    lineWidth: 2,
+    smooth: false,
+    pointSize:0,
+    labels: ['value']
+      })
+      
+  new Morris.Line({   
+    element: 'brChart',
+    data: getGraphData(dataBr) ,
+    xkey: 'step',
+    ykeys: ['value'],
+    parseTime: false,
+    lineWidth: 2,
+    smooth: false,
+    pointSize:0,
+    labels: ['value']
+      })
+      
+  new Morris.Line({   
+    element: 'pulseChart',
+    data: getGraphData(dataPulse) ,
+    xkey: 'step',
+    ykeys: ['value'],
+    parseTime: false,
+    lineWidth: 2,
+    smooth: false,
+    labels: ['value']
+      })
+  #end init
+    
+  updateWeb = ->
+    $(".temperature").empty()
+    $("#ecgChart").empty()
+    $("#brChart").empty()
+    $("#pulseChart").empty()  
+    $("#loginDate").text(getCurrentTime("1"))
+    #update ecg chart
+    new Morris.Line({   
+      element: 'ecgChart',
+      data: getGraphData(dataECG) ,
+      xkey: 'step',
+      ykeys: ['value'],
+      parseTime: false,
+      lineWidth: 2,
+      smooth: false,
+      pointSize:0,
+      
+      labels: ['value']
+        })
+    #update breath chart
+    new Morris.Line({   
+      element: 'brChart',
+      data: getGraphData(dataBr) ,
+      xkey: 'step',
+      ykeys: ['value'],
+      parseTime: false,
+      lineWidth: 2,
+      smooth: true,
+      pointSize:0,
+      labels: ['value']
+        })
+    #update pulse chart
+    new Morris.Line({   
+      element: 'pulseChart',
+      data: getGraphData(dataPulse) ,
+      xkey: 'step',
+      ykeys: ['value'],
+      parseTime: false,
+      lineWidth: 2,
+      smooth: false,
+      labels: ['value']
+        })
 
-   
-   getGraphData = (data) ->
-     dataG = []
-     for d in data 
-       tmp = { "step" : i.toString(),value: d }
-       dataG.push(tmp) 
-     return dataG;
+
+  setInterval updateWeb,1000
+  
             
-  PrivatePub.subscribe "/messages/new", (data, channel) ->
+  PrivatePub.subscribe "/temperature", (data, channel) ->
     temperature = Math.round(data.message *100 ) / 100
     $(".temperature").append("<li>"+ temperature.toString() + "</li>")
-    $("#charts").empty()
+    $("#tpChart").empty()
+    
     dataT.shift()
-    #dataT.push(data.message)
-    dataT.push(temperature )       
+    dataT.push(temperature)     
+      
     new Morris.Line({   
-      element: 'charts',
-      data: getTemperature(dataT) ,
+      element: 'tpChart',
+      data: getGraphData(dataT) ,
       xkey: 'step',
       ykeys: ['value'],
       parseTime: false,
@@ -62,16 +155,16 @@ $(document).ready ->
       labels: ['value']
         })
         
-  PrivatePub.subscribe "/messages/ecg", (data, channel) ->
+  PrivatePub.subscribe "/ecg", (data, channel) ->
     ecg= Math.round(data.message *100 ) / 100
-    #$(".temperature").append("<li>"+ temperature.toString() + "</li>")
-    $("#ecgCharts").empty()
+    #$("#ecgChart").empty()
+    
     dataECG.shift()
-    #dataT.push(data.message)
     dataECG.push(ecg )       
+    ###
     new Morris.Line({   
-      element: 'ecgCharts',
-      data: getECG(dataECG) ,
+      element: 'ecgChart',
+      data: getGraphData(dataECG) ,
       xkey: 'step',
       ykeys: ['value'],
       parseTime: false,
@@ -79,3 +172,43 @@ $(document).ready ->
       smooth: false,
       labels: ['value']
         })
+  ###
+  PrivatePub.subscribe "/ecgs", (data, channel) ->
+    ecgs= data.message
+    $.each ecgs, (idx,item) ->
+      dataECG.shift()
+      dataECG.push(item.ecg)
+       
+
+        
+  PrivatePub.subscribe "/pulse_spo2", (data, channel) ->
+    pulse = Math.round(data.pulse *100 ) / 100
+    spo2 =Math.round(data.spo2 *100 ) / 100
+    $("#heartData").text(pulse.toString())
+    $("#spo2Data").text(spo2.toString())
+    dataPulse.shift()
+    dataPulse.push(pulse)    
+
+      
+  PrivatePub.subscribe "/breath", (data, channel) ->
+    breath= Math.round(data.breath *100 ) / 100    
+    $("#brChart").empty()
+    dataBr.shift()
+    dataBr.push(br)       
+    new Morris.Line({   
+      element: 'brChart',
+      data: getGraphData(dataBr) ,
+      xkey: 'step',
+      ykeys: ['value'],
+      parseTime: false,
+      lineWidth: 2,
+      smooth: false,
+      labels: ['value']
+        })
+        
+  PrivatePub.subscribe "/breaths", (data, channel) ->
+    breaths= data.breaths
+    $.each breaths, (idx,item) ->
+      dataBr.shift()
+      dataBr.push(item.breath)
+     

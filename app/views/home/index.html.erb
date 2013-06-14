@@ -1,15 +1,83 @@
-<h1>iHealth-home</h1>
-<div id="charts"></div>
-<div id="ecgCharts"><div>
-<div id="pulse"><div>
-<div id="spo2"><div>
+<div id="container">
+<div id="nav">
+  	<p>
+      	<span id="userName">邹旭</span>
+          <span id="userType">成人</span>
+          <span id="productName">远程心电监控</span>
+          <span id="loginDate"><%= DateTime.parse(Time.now.to_s).strftime('%Y-%m-%d %H:%M:%S').to_s%></span>
+      </p>
+  </div>
 
-<ul class = "temperature">
-  
-</ul>
-
-<%= subscribe_to "/messages/new" %>
-<%= subscribe_to "/messages/ecg" %>
+  <!--maincontent start -->
+  <div id="main">
+  	
+      <!--left column #mainbar start-->
+  	<div id="mainbar">      	
+          <!--===================charts block start=====================-->
+          <div id="charts">
+              <h3 class="special">心电</h3>
+              <div id="ecgChart" class="chartsDiv"></div>
+              <h3>呼吸</h3>
+              <div id="brChart" class="chartsDiv"></div>
+              <h3>血压</h3>
+              <div id="pulseChart" class="chartsDiv">                   
+              </div>
+          </div>
+          <!--==================charts block end=======================-->
+    </div>
+        <!--left column #mainbar end-->    
+      <div id="sidebar">
+      	 <!--==============right column 1 ==================================-->
+          <div class="sidebarDiv" id="heartInfo">
+              <span id="heartData" class="data">120</span>
+              <div class="rightInfo">
+                <p>SPM</p>  
+                <p id="stInfo">ST:-0.00</p>
+              </div>
+          </div>
+          <!--==============right column 1 end =================================-->
+          
+          
+          <!--===============right column 2 ===================================-->
+          <div class="sidebarDiv" id="basicInfo">            
+              <p class="first"><span class="fontSize10 whiteColor">SYE.</span><span class="fontSize50 left30">115</span></p>
+              <p><span class="fontSize10 whiteColor">MAP.</span><span class="fontSize40 left30">95</span></p>
+              <p><span class="fontSize10 whiteColor">DTA.</span><span class="fontSize50 left30">80</span></p>                 
+          </div>
+          <!--===============right column 2 end ================================-->
+          
+          
+          <!--===============right column 3 ====================================-->
+          <div class="sidebarDiv" id="spoeInfo">
+              <p class="first"><span class="topTitle40 fontSize10">SPOE</span><span id= "spo2Data"class="info fontSize50 left30">98</span></p>
+          </div>
+          <!--===============right column 3 end==================================-->
+          
+          <!--===============right column 4====================================== -->
+          <div class="sidebarDiv" id="tempInfo">
+              <div class="leftInfo">
+                  <p class="top5"><span class="topTitle12 fontSize10">TEMP. ℃</span></p>
+                  <p class="top5"><span class="topTitle12 fontSize10">TR</span><span class="fontSize30">37.7</span></p>
+                  <p class="top5"><span class="topTitle12 fontSize10">TA</span><span class="fontSize30">37.2</span></p>
+              </div>
+              <div class="rightInfo">
+                 <p><span class="topTitle12 fontSize10">TA</span><span class="fontSize30">0.5</span></p>
+              </div>
+          </div>
+          <!--============right column 4 end====================================-->
+      </div>
+      <!--right column #sidebar end-->
+      
+      <!--clear float -->
+  	<div class="clr"></div>
+  </div>
+ <!--maincontent end -->
+</div>
+<%= subscribe_to "/temperature" %>
+<%= subscribe_to "/ecg" %>
+<%= subscribe_to "/ecgs" %>
 <%= subscribe_to "/pulse_spo2" %>
+<%= subscribe_to "/breath" %>
+<%= subscribe_to "/breaths" %>
 
 

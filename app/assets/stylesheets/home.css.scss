@@ -1,3 +1,59 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/* container css */
+#container{width:80%;margin:auto;}
+
+/* nav css */
+#nav{width:100%;background:#4b4b4b;height:22px;margin:15px 0 10px 0;padding:8px 0 0 10px;}
+#nav p span{margin-right:10px;}
+#loginDate{color:#87bb4d;font-weight:bold;float:right;margin-right:10px;}
+
+/* main css */
+#main{width:100%;}
+
+/* mainbar css */
+#mainbar{width:77%;float:left;}
+#mainbar h3{color:#537513;font-weight:normal;margin:5px 0 5px 20px;}
+#mainbar h3.special{color:#ff5050;}
+#mainbar .chartsDiv{background:#fffde4;width:98%;height:180px;}
+#mainbar table{width:98%;margin:10px 0 5px 0;text-align:center;}
+#mainbar table th{background:#0070c0;height:20px;}
+#mainbar table td.address{width:40%;}
+
+/* sidebar css */
+#sidebar{width:20%;float:right;margin-top:20px;}
+.sidebarDiv{border:1px solid #fff;width:100%;margin:auto;height:80px;}
+.data{font-size:64px;float:left;font-weight:bold;margin:0 0 0 10px;font-family:"Courier New", Courier, monospace;letter-spacing:-5px;}
+#sidebar p{margin:-10px 0 0 20px;}
+#sidebar p.first{margin-top:20px;}
+#sidebar p.top5{margin-top:5px;}
+#sidebar .rightInfo{float:right;margin:15px 15px 0 0;}
+
+/* sidebar elementary css */
+.font{font-family:"Courier New", Courier, monospace;letter-spacing:-5px;}
+.left30{margin-left:30px;}
+.fontSize50{font-size:50px;}
+.fontSize40{font-size:40px;}
+.fontSize30{font-size:30px;}
+.fontSize10{font-size:10px;}
+.top20{margin-top:20px;}
+.whiteColor{color:#fff;}
+.redColor{color:#ff5050;}
+.topTitle40{position:relative;top:-40px;}
+.topTitle12{position:relative;top:-12px;left:-5px;}
+
+/* heartInfo css */
+#heartInfo{color:#00b050;overflow:hidden;}
+#stInfo{position:relative;top:40px;}
+
+/* basicInfo css */
+#basicInfo{color:#ffcc66;height:200px;overflow:hidden;}
+#basicInfo span.info{display:inline-block;text-align:right;width:40%;}
+
+
+/* spoeInfo css */
+#spoeInfo{color:#ff5050;height:100px; overflow:hidden;}
+
+/* tempInfo css */
+#tempInfo{color:#0070c0;height:120px;overflow:hidden;}
+
+#tempInfo .rightInfo{float:right;position:relative;top:45px;left:-20px;}
+#tempInfo .leftInfo{float:left;position:relative;top:15px;}
