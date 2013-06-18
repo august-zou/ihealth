@@ -59,6 +59,7 @@ $(document).ready ->
     lineWidth: 2,
     smooth: false,
     pointSize:0,
+    hideHover:true,
     labels: ['value']
       })
       
@@ -102,7 +103,7 @@ $(document).ready ->
       lineWidth: 2,
       smooth: false,
       pointSize:0,
-      
+      hideHover:true,
       labels: ['value']
         })
     #update breath chart
