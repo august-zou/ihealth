@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(document).ready ->
   dataT =  [25,25,25,25,25]
-  dataECG =  new Array(100);
+  dataECG =  new Array(500);
   dataPulse =  new Array(5);
   dataSpo2 =  new Array(5);
   dataBr =  new Array(100);
@@ -43,9 +43,10 @@ $(document).ready ->
   
   #init
   for i in [0..100] 
-    dataECG[i] = 0 
     dataBr[i] = 0
-    
+  for i in [0..500]
+    dataECG[i] = 0
+        
   for i in [0..5] 
     dataPulse[i] = 0
   
