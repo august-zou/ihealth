@@ -135,26 +135,10 @@ $(document).ready ->
             
   PrivatePub.subscribe "/temperature", (data, channel) ->
     temperature = Math.round(data.message *100 ) / 100
-    $(".temperature").append("<li>"+ temperature.toString() + "</li>")
-    $("#tpChart").empty()
-    
+    $("#tmpDataT1").text(temperature.toString())
+    $("#tmpDataT2").text(temperature.toString())   
     dataT.shift()
-    dataT.push(temperature)     
-      
-    new Morris.Line({   
-      element: 'tpChart',
-      data: getGraphData(dataT) ,
-      xkey: 'step',
-      ykeys: ['value'],
-      parseTime: false,
-      smooth: false,
-      ymin:'auto 25',
-      ymax:'auto 45',
-      postUnits: 'C',
-      goals:[35.0,37.0],
-      goalLineColors:['#00ff00','#ff0000'],
-      labels: ['value']
-        })
+    dataT.push(temperature)
         
   PrivatePub.subscribe "/ecg", (data, channel) ->
     ecg= Math.round(data.message *100 ) / 100
