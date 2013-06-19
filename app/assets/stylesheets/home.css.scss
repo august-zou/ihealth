@@ -2,18 +2,47 @@
 #container{width:80%;margin:auto;}
 
 /* nav css */
-#nav{width:100%;background:#4b4b4b;height:22px;margin:15px 0 10px 0;padding:8px 0 0 10px;}
-#nav p span{margin-right:10px;}
-#loginDate{color:#87bb4d;font-weight:bold;float:right;margin-right:10px;}
+#nav {
+  width:100%;
+  background:#4b4b4b;
+  height:22px;
+  margin:5px 0 10px 0;
+  padding:8px 0 0 0px;
+  
+  p {
+    span {
+      margin:0 10px 0 8px;
+    }
+  }
+}
+
+#loginDate {
+  color:#87bb4d;
+  font-weight:bold;
+  float:right;
+  margin-right:10px;
+}
 
 /* main css */
-#main{width:100%;}
+#main { width:100%; }
 
 /* mainbar css */
-#mainbar{width:77%;float:left;}
-#mainbar h3{color:#537513;font-weight:normal;margin:5px 0 5px 20px;}
-#mainbar h3.special{color:#ff5050;}
-#mainbar .chartsDiv{background:#fffde4;width:98%;height:180px;}
+#mainbar {
+  width:77%;
+  float:left;
+  h3 { 
+    color:#537513;
+    font-weight:normal;
+    margin:5px 0 5px 20px;
+    .special { color:#ff5050; }
+  }
+  .chartsDiv{
+    background:#fffde4;
+    width:98%;
+    height:180px;
+  }
+}
+
 #mainbar table{width:98%;margin:10px 0 5px 0;text-align:center;}
 #mainbar table th{background:#0070c0;height:20px;}
 #mainbar table td.address{width:40%;}
@@ -60,3 +89,20 @@
 
 #tempInfo .rightInfo{float:right;position:relative;top:45px;left:-20px;}
 #tempInfo .leftInfo{float:left;position:relative;top:15px;}
+
+/* logo css */
+#logo {
+  background:#0070c0;
+  height:100px;
+  padding:10px 0 0 0;
+}
+#logo img{float:left;width:60px;margin:10px 20px 0 30px;}
+#logo h1{font-size:50px;font-family:微软雅黑;padding:10px 0 5px 30px;color:#fff;letter-spacing:5px;}
+/* menu css */
+#menu{height:40px;background:#0070c0;border-top:1px solid #fff;;border-bottom:2px solid #fff;}
+#menu ul{list-style:none;}
+#menu ul li{width:20%;display:inline-block;font-size:16px;margin:10px 0 0 10px;}
+#menu ul li a{display:inline-block;height:20px;text-align:center;color:#fff;text-decoration:none;font-weight:bold;}
+#menu ul li a:hover,.active{border-top:2px solid #ff5050;}
+#footer{height:30px;margin:5px 0 0 0;text-align:center;background:#0070c0;color:#fff;}
+#footer p{padding:10px 0 0 0;}

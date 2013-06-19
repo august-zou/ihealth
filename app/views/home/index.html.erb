@@ -1,7 +1,27 @@
 <div id="container">
+  
+	<!--logo start-->
+    
+    <div id="logo">
+      <%= image_tag("logo.png",:width=>50)%><h1>移动智能健康管理系统</h1>
+    </div>
+    <!--logo end -->
+    
+    <!--menu start-->
+    <div id="menu">
+    	<ul>
+        	<li><a href="#" class="active">实时监测</a></li>
+        	<li><a href="#">人群监测</a></li>
+            <li><a href="#">健康评估</a></li>
+            <li><a href="#">健康干预</a></li>
+        </ul>
+    </div>
+    <!--menu end-->
+    
+    
 <div id="nav">
   	<p>
-      	<span id="userName">邹旭</span>
+      	  <span id="userName">邹旭</span>
           <span id="userType">成人</span>
           <span id="productName">远程心电监控</span>
           <span id="loginDate"><%= DateTime.parse(Time.now.to_s).strftime('%Y-%m-%d %H:%M:%S').to_s%></span>
@@ -78,6 +98,10 @@
   	<div class="clr"></div>
   </div>
  <!--maincontent end -->
+ <!--maincontent end -->
+ <div id="footer">
+  	<p>COPYRIGHT&nbsp;&copy;&nbsp;杭州师范大学</p>
+ </div>
 </div>
 <%= subscribe_to "/temperature" %>
 <%= subscribe_to "/ecg" %>
